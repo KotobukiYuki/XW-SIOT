@@ -33,7 +33,8 @@ Open up a terminal, and establish SSH connection to the Pi. Operation various de
   write_enable=YES
   utf8_filesystem=YES
   ```
+  ### 3. Install WebIOPi.
+  Please refer to https://webiopi.trouch.com/INSTALL.html
 </details>
-### 3. Install WebIOPi.
-Please refer to https://webiopi.trouch.com/INSTALL.html
+
 
