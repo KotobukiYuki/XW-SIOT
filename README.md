@@ -34,6 +34,10 @@ Open up a terminal, and establish SSH connection to the Pi. Operation various de
   utf8_filesystem=YES
   ```
   ### 3. Install 
+  Open a terminal, and type in:
+  ```
+  sudo apt-get install python3-flask
+  ```
 </details>
 
 
