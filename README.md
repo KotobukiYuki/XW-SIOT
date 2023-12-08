@@ -33,8 +33,7 @@ Open up a terminal, and establish SSH connection to the Pi. Operation various de
   write_enable=YES
   utf8_filesystem=YES
   ```
-  ### 3. Install WebIOPi.
-  please refer to: https://github.com/doublebind/raspi
+  ### 3. Install 
 </details>
 
 
