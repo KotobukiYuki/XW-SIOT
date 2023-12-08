@@ -7,6 +7,8 @@ You will need a Pi4 (any RAM size) to run this SIOT project. First of all, insta
 ### 2. Deploy FTP server on the Pi.
 Open up a terminal, and establish SSH connection to the Pi. Operation various depending on the OS you use, I'll shown windows demo here:
   1. Open CMD
-  2. Type in 'ssh <username>@<ip_address_of_Pi>'
-
+  2. Type in：
+```
+ssh <username>@<ip_address_of_Pi>'
+```
 
