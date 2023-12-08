@@ -17,8 +17,7 @@ Open up a terminal, and establish SSH connection to the Pi. Operation various de
   ssh <username>@<ip_address_of_Pi>
   ```
   And type in YES if asked and login with your username and password of the Pi4.
-  
-  3. Install the FTP server: \<br>
+  3. Install the FTP server: <br>
   ```
   sudo apt-get install vsftpd
   sudo service vsftpd start
