@@ -36,6 +36,7 @@ Open up a terminal, and establish SSH connection to the Pi. Operation various de
   ### 3. Install 
   Open a terminal, and type in:
   ```
+  sudo apt update && sudo apt install pipx
   sudo apt-get install python3-flask
   ```
 </details>
