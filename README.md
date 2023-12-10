@@ -48,7 +48,15 @@ Open up a terminal, and establish SSH connection to the Pi. Operation various de
   For Lidar: https://github.com/TFmini/TFmini-RaspberryPi/tree/master
   For DHT11: https://learn.adafruit.com/dht-humidity-sensing-on-raspberry-pi-with-gdocs-logging/python-setup
 
-  I encountered some issues due to the new PEP 668 policy. I think the Raspi OS is in a transient state and is not stable. Feel free to drop me an email if the setup didn't work out.
+  I encountered some issues due to the new PEP 668 policy. For example, the following code didn't work for me:
+  ```
+  sudo apt-get install libgpiod2
+  ```
+  but
+  ```
+  sudo apt install libgpiod2
+  ```
+  worked! I think the Raspi OS is in a transient state and is not stable. Feel free to drop me an email if the setup didn't work out.
   
   Once you have FLASK installed, just go to the folder where the web server is hosted and type:
   ```
