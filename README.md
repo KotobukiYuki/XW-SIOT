@@ -36,8 +36,13 @@ Open up a terminal, and establish SSH connection to the Pi. Operation various de
   ### 3. Install 
   Open a terminal, and type in:
   ```
-  sudo apt update && sudo apt install pipx
   sudo apt-get install python3-flask
+  ```
+  In the new Raspi OS, it is very likely for you to encounter an error called "externally-managed-environment". This is because in the latest release of Raspi OS, PEP 668 was updated: https://realpython.com/python-virtual-environments-a-primer/?ref=yaolong.net
+  Because this project is only a prototype, we will overwrite this by:
+  ```
+  sudo rm -f /usr/lib/python3.X/EXTERNALLY-MANAGED
+  sudo rm -f /usr/lib/python3.X/EXTERNALLY-MANAGED.orig
   ```
 </details>
 
