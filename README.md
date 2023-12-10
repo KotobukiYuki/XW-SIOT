@@ -44,6 +44,11 @@ Open up a terminal, and establish SSH connection to the Pi. Operation various de
   sudo rm -f /usr/lib/python3.X/EXTERNALLY-MANAGED
   sudo rm -f /usr/lib/python3.X/EXTERNALLY-MANAGED.orig
   ```
+  Once you have FLASK installed, just go to the folder where the web server is hosted and type:
+  ```
+  sudo python3 app.py
+  ```
+  Then the webapp will be started.
 </details>
 
 
