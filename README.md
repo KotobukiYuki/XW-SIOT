@@ -44,6 +44,7 @@ Open up a terminal, and establish SSH connection to the Pi. Operation various de
   sudo rm -f /usr/lib/python3.X/EXTERNALLY-MANAGED
   sudo rm -f /usr/lib/python3.X/EXTERNALLY-MANAGED.orig
   ```
+  Then we will install some dependencies for the Lidar and the DHT11 environment sensor.
   Once you have FLASK installed, just go to the folder where the web server is hosted and type:
   ```
   sudo python3 app.py
