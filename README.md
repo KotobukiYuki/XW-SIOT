@@ -1,6 +1,5 @@
 # Xianghao's SIOT coursework
-A SMART FUTURE  FOR THE WELL-BEING  OF DESKBOUND CREATORS
-This project explored the end-to-end system design of an IoT device that monitors and warns about deskbound worker’s postures, which also provides a smart cooling fan that needs no human intervention. This device improves the well-being and working environment of deskbound workers. 
+This project explored the end-to-end system design of an IoT device that monitors and warns about deskbound worker’s postures, which also provides a smart cooling fan that needs no human intervention. This device improves the well-being and working environment of deskbound workers. A fully functional prototype with a carefully designed Web App proved the feasibility of such idea, and it is already a useful device in my daily life. More health data could be collected and merged to give a comprehensive view of the health status of deskbound workers and provide warnings for them as early as possible. The device could also be used to promote a healthier work-life balance, as the LiDAR data already provided insights in schedule and time arrangements.
 
 ## Device Setup
 <details>
