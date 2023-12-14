@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IOT Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        var instanceNotification = Notification
+        var distance = 100
+        document.addEventListener('DOMContentLoaded', (event) => {
+            var fanStatus = localStorage.getItem('fanStatus') || 'auto';
+            //console.log(fanStatus);
+            var flag = localStorage.getItem('flag')  || 'no';
+            //console.log(flag)
+            updateButtonStyles()
+        });
+
+        function updateFanStatus(newStatus) {
+            localStorage.setItem('fanStatus', newStatus);
+            updateButtonStyles();
+        }
+
+        function updateButtonStyles() {
+            var fanStatus = localStorage.getItem('fanStatus');
+            var fanAutoButton = document.getElementById('fanAutoButton');
+            var fanOffButton = document.getElementById('fanOffButton');
+
+            //console.log('gengxinanniu')
+            //console.log(fanStatus)
+            if (fanStatus === 'auto') {
+                fanAutoButton.classList.add('green-button');
+                fanOffButton.classList.remove('green-button');
+                //console.log('gengxinanniuauto')
+
+            } else {
+                fanOffButton.classList.add('green-button');
+                fanAutoButton.classList.remove('green-button');
+                //console.log('gengxinanniuoff')
+            }
+        }
+        
+        function updateFanStatus(newStatus) {
+            localStorage.setItem('fanStatus', newStatus);
+            //console.log('status is' + ' ' +newStatus)
+        }
+        function updateFlag(newFlag) {
+            localStorage.setItem('flag', newFlag);
+            //console.log('flag is' + newFlag)
+        }
+
+        console.log(instanceNotification);
+        if (instanceNotification) {
+            var permissionNow = instanceNotification.permission;
+            if (permissionNow === 'granted') {//allow notification
+                distanceAlarm();
+            } else if (permissionNow === 'default') {
+                setPermission();
+            } else if (permissionNow === 'denied') {
+                console.log('User Blocked Notification!');
+            }  else {
+                setPermission();
+            }
+        }
+
+        function setPermission() {
+            //requst allowance for notification
+            instanceNotification.requestPermission(function (PERMISSION) {
+                if (PERMISSION === 'granted') {
+                    console.log('Notification Granted');
+                } else {
+                    console.log('User Blocked Notification!');
+                }
+            });
+        }
+
+        function distanceAlarm(){
+            $.getJSON('/getLatestDistance', function(data){
+                if(data.error){
+                    console.log('Error: ' + data.error);
+                } else {
+                    if (data.distance < 50) {
+                        console.log(data.distance)
+                        var instanceNotification = new Notification("You sit too close to the screen!")
+                    } else if (data.distance > 99){
+                        newStatus = 'off'
+                        updateFanStatus(newStatus)
+                    }
+                }
+            });
+        }
+
+        function controlFan(action) {
+            if(action === 'auto') {
+                $.get('/fan/' + action, function(data) {
+                    updateFanStatus(data)
+                    //console.log('update to auto')
+                });
+            } else {
+                $.get('/fan/' + action, function(data) {
+                    updateFanStatus(data)
+                    //console.log('update to off')
+                });
+            }
+        }
+
+        function autoControlFan(){
+            $.getJSON('/getLatestTemperature', function(data){
+                if(data.error){
+                    //console.log('Error: ' + data.error);
+                } else {
+                    if (data.temperature > 22) {
+                        var fanStatus = localStorage.getItem('fanStatus');
+                        if (fanStatus === 'auto'){
+                            controlFan('auto')
+                            //console.log('fanStatus detected is' + fanStatus)
+                            var flag = localStorage.getItem('flag')
+                            if (flag === 'no'){
+                                var instanceNotification = new Notification("The room is too hot, fan auto on!")
+                                var flag = 'yes'
+                                updateFlag(flag)
+                            }
+                        }
+                    } else {
+                        controlFan('off')
+                        //console.log('fanStatus detected is' + fanStatus)
+                    }
+                }
+            });
+        }
+
+        setInterval(distanceAlarm, 5000);
+        setInterval(autoControlFan, 5000);
+      </script>
+    <style>
+        button {
+            font-size: 20px; 
+            padding: 10px 20px; 
+            margin: 5px;
+        }
+
+        .box {
+            border: 1px solid black;
+            padding: 20px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 150px; 
+            font-size: 50px;
+            color: white; 
+            background-color: orange; 
+        }
+
+        .green-button {
+            background-color: green;
+            color: white;
+        }
+
+        .white-button {
+            background-color: white;
+            color: white;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr; 
+            grid-gap: 10px; 
+            padding: 10px;
+            height: 100vh; 
+        }
+        .box {
+            border: 1px solid black;
+            padding: 20px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 150px; 
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr; 
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/distance" class="box" id="distance">Distance To Screen</a>
+        <a href="/temperature" class="box" id="temperature">Room Temperature</a>
+        <a href="/humidity" class="box" id="humidity">Room Humidity</a>
+        <div class="box">
+            <button id="fanAutoButton" onclick="controlFan('auto');updateButtonStyles()">Fan Auto</button>
+            <button id="fanOffButton" onclick="controlFan('off');updateButtonStyles()">Fan Off</button>
+        </div>
+    <canvas id="distanceChart" width="device-width" height= 100%></canvas>
+</body>
+</html>
