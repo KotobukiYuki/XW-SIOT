@@ -37,7 +37,7 @@
         
         function updateFanStatus(newStatus) {
             localStorage.setItem('fanStatus', newStatus);
-            //console.log('status is' + ' ' +newStatus)
+            console.log('status is' + ' ' +newStatus)
         }
 
         console.log(instanceNotification);
@@ -103,9 +103,12 @@
                         var fanStatus = localStorage.getItem('fanStatus');
                         if (fanStatus === 'auto'){
                             controlFan('auto')
-                            //console.log('fanStatus detected is' + fanStatus)
+                            console.log('fanStatus detected is' + fanStatus)
+                        } else {
+                            controlFan('off')
                         }
                     } else {
+                        console.log('turn off')
                         controlFan('off')
                         //console.log('fanStatus detected is' + fanStatus)
                     }

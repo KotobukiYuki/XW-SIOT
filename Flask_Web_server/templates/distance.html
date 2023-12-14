@@ -69,9 +69,30 @@
                 }
             });
         }
-
+        function autoControlFan(){
+            $.getJSON('/getLatestTemperature', function(data){
+                if(data.error){
+                    //console.log('Error: ' + data.error);
+                } else {
+                    if (data.temperature > 22) {
+                        var fanStatus = localStorage.getItem('fanStatus');
+                        if (fanStatus === 'auto'){
+                            controlFan('auto')
+                            console.log('fanStatus detected is' + fanStatus)
+                        } else {
+                            controlFan('off')
+                        }
+                    } else {
+                        console.log('turn off')
+                        controlFan('off')
+                        //console.log('fanStatus detected is' + fanStatus)
+                    }
+                }
+            });
+        }
         setInterval(updateChart, 30000); // Update the chart every 30s
         setInterval(distanceAlarm, 5000); // Update the alarm every 5s
+        setInterval(autoControlFan, 5000); // Update the fan every 5s
     </script>
 </body>
 </html>
