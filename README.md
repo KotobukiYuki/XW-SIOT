@@ -65,4 +65,7 @@ Open up a terminal, and establish SSH connection to the Pi. Operation various de
   Then the webapp will be started.
 </details>
 
+## Web App UI
+![image](https://github.com/KotobukiYuki/XW-SIOT/assets/52342831/09a79fce-365c-4f9f-af98-e60213448fd7)
+
 
