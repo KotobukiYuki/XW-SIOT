@@ -5,7 +5,7 @@
     <title>Distance Data Chart</title>
     <button onclick="window.location.href='/'">Back To Home Page</button>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> <!-- Import AJAX from Google to allow realtime interactions -->
 </head>
 <body>
     <h1>Distance Data Over Time</h1>
@@ -18,7 +18,7 @@
             data: {
                 labels: [],
                 datasets: [{
-                    label: 'Distance over Time',
+                    label: 'Distance over Time, Past 24h',
                     data: [],
                     backgroundColor: 'rgba(0, 123, 255, 0.5)',
                     borderColor: 'rgba(0, 123, 255, 1)',
@@ -35,7 +35,7 @@
             }
         });
 
-        function updateChart() {
+        function updateChart() { // Update the plot
             $.getJSON('/getDistanceData', function(data) {
                 if(data.error){
                     console.log('Error: ' + data.error);
@@ -71,7 +71,7 @@
         }
 
         setInterval(updateChart, 30000); // Update the chart every 30s
-        setInterval(distanceAlarm, 5000); // Update the alarm every 30s
+        setInterval(distanceAlarm, 5000); // Update the alarm every 5s
     </script>
 </body>
 </html>

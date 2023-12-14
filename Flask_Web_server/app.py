@@ -4,10 +4,12 @@ import subprocess
 import csv
 import fan as fan
 
+
 app = Flask(__name__)
+
+# Initialising the Web Server and load "hardware drives" as subprocess.
 process1 = subprocess.Popen(['python', 'lidar.py'])
 process2 = subprocess.Popen(['python', 'environment_sensor.py'])
-
 
 
 @app.route('/')
@@ -89,8 +91,6 @@ def fanOn():
 def fanOff():
     fan.fanOff()
     return 'Off'
-
-
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True, ssl_context='adhoc')
