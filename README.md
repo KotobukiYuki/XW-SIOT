@@ -67,5 +67,7 @@ Open up a terminal, and establish SSH connection to the Pi. Operation various de
 
 ## Web App UI
 ![image](https://github.com/KotobukiYuki/XW-SIOT/assets/52342831/09a79fce-365c-4f9f-af98-e60213448fd7)
+![image](https://github.com/KotobukiYuki/XW-SIOT/assets/52342831/898e355d-ef50-42dd-bef2-3d93b05ab567)
+
 
 
